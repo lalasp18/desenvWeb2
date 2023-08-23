@@ -1,6 +1,6 @@
 <%-- 
-    Document   : atorR
-    Created on : 23 de ago. de 2023, 13:55:31
+    Document   : atorU
+    Created on : 23 de ago. de 2023, 14:03:56
     Author     : LEDS
 --%>
 
@@ -9,16 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Locadora de Vídeo Passatempo - Listar Ator</title>
+        <title>Locadora de Vídeo Passatempo - ID Ator</title>
         
         <link rel="icon" href="../img/ReelRover.png">
-        <link rel="stylesheet" href="../css/atorR.css">
+        <link rel="stylesheet" href="../css/atorU.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     
     </head>
     <body>
+        
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="../index.jsp">
@@ -53,17 +54,8 @@
             </div>
         </nav>
         
-        <main class="mx-auto mt-5">
-            <h4 class="text-center">Lista De Ator</h4>
-            <div class="row row-cols-2 row-cols-lg-5">
-                <div class="card col" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">Nome: </h5>
-                      <button type="button" class="btn btn-outline-warning"><a href="atorU.jsp" class="card-link">Editar</a></button>
-                      <button type="button" class="btn btn-outline-danger">Deletar</button>
-                    </div>
-                </div>
-            </div>
+        <main>
+            <h1 class="text-center">Editar Ator por ID</h1>
         </main>
         
         <footer class="footer mt-lg-5">
