@@ -1,0 +1,50 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /*width: 100%;*/
+}
+.navbar{
+    color: aqua;
+}
+main{
+    flex-grow: 1;
+}
+.footer{
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    background-color: #0E0E0E;
+    color: white;
+    font-size: .8rem;
+    box-shadow: 0px -.1rem .3rem rgba(0, 0, 0, 0.2);
+}
+.footer-left p{
+    font-size: .8rem;
+}
+.footer-right li{
+    color: white;
+    font-size: .738rem;
+}
+.list-group .list-group-item{
+    border: 0;
+}
+.fab{
+    font-size: 1.3rem;
+    color: #FC6F6F;
+}
+.fas{
+    color: #FC6F6F;
+}
+
+.main .m_3 a, .footer a{
+    color: #FC6F6F;
+    text-decoration: none;
+    font-weight: bold;
+}
+.main .m_3 a:hover, .footer a:hover{
+    color: #FC6F6F;
+    text-decoration: underline;
+}
+p{
+    font-size: 1.2rem;
+}
