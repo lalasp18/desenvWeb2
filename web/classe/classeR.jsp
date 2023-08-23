@@ -37,7 +37,7 @@
                       Controle de Acervo
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="ator/atorC.jsp">Cadastrar Ator</a></li>
+                      <li><a class="dropdown-item" href="../ator/atorC.jsp">Cadastrar Ator</a></li>
                       <li><a class="dropdown-item" href="classeC.jsp">Cadastrar Classe</a></li>
                     </ul>
                   </li>
@@ -47,30 +47,13 @@
         </nav>
         
         <main class="mx-auto mt-5">
-            <%
-                String nome = request.getParameter("nome");
-                String valor = request.getParameter("valor");
-                String dtDevolucao = request.getParameter("dtDevolucao");
-
-                String mensagem = "";
-
-                if ((nome == null || nome.trim().isEmpty()) && (valor == null || valor.trim().isEmpty()) && (dtDevolucao == null || dtDevolucao.trim().isEmpty())) {
-                    mensagem = "Há campos inválidos!";
-                } else {
-                    mensagem = "Classe cadastrada com sucesso!";
-                }
-
-                request.setAttribute("mensagem", mensagem);
-//                request.getRequestDispatcher("classeSalva.jsp").forward(request, response);
-            %>
-            
-            <h4 class="text-center"><%= request.getAttribute("mensagem") %></h4>
+            <h4 class="text-center">Lista de Classe</h4>
             <div class="row row-cols-2 row-cols-lg-5">
                 <div class="card col" style="width: 18rem;">
                     <div class="card-body">
-                      <h5 class="card-title"><%out.println(nome);%></h5>
-                      <h6 class="card-subtitle mb-2 text-body-secondary">Valor: <%out.println(valor);%></h6>
-                      <p class="card-text">Data de Devolução: <%out.println(dtDevolucao);%></p>
+                      <h5 class="card-title">Nome: </h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">Valor: </h6>
+                      <p class="card-text">Data de Devolução: </p>
                       <a href="#" class="card-link">Card link</a>
                       <a href="#" class="card-link">Another link</a>
                     </div>

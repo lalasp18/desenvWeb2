@@ -1,6 +1,6 @@
 <%-- 
-    Document   : atorC
-    Created on : 23 de ago. de 2023, 13:39:20
+    Document   : atorR
+    Created on : 23 de ago. de 2023, 13:55:31
     Author     : LEDS
 --%>
 
@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Locadora de Vídeo Passatempo - Cadastrar Ator</title>
+        <title>Locadora de Vídeo Passatempo - Listar Ator</title>
         
         <link rel="icon" href="../img/ReelRover.png">
-        <link rel="stylesheet" href="../css/atorC.css">
+        <link rel="stylesheet" href="../css/atorR.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -54,20 +54,16 @@
         </nav>
         
         <main class="mx-auto mt-5">
-            <h2>Cadastrar Ator</h2>
-            <form class="row g-3 mx-auto mt-4 needs-validation" method="post" action="" novalidate="">
-                <div class="col-md-12">
-                  <label for="inputNome" class="form-label">Nome do Ator</label>
-                  <input type="text" class="form-control" name="nome" id="inputNome" required="">
+            <h4 class="text-center">Lista De Ator</h4>
+            <div class="row row-cols-2 row-cols-lg-5">
+                <div class="card col" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Nome: </h5>
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                    </div>
                 </div>
-
-                <div class="col-2">
-                  <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
-                <div class="col-2">
-                  <button type="reset" class="btn btn-secondary">Resetar</button>
-                </div>
-            </form>
+            </div>
         </main>
         
         <footer class="footer mt-lg-5">
