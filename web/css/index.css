@@ -2,13 +2,14 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /*width: 100%;*/
-}
-.navbar{
-    color: aqua;
+    font-family: 'Montserrat', sans-serif;
 }
 main{
     flex-grow: 1;
+    width: 100%;
+}
+section{
+    color: #FC6F6F;
 }
 .footer{
     font-family: 'Montserrat', sans-serif;

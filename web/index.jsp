@@ -21,7 +21,6 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="index.jsp">
-                  <img src="img/ReelRover.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
                 Reel Rover
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,27 +51,23 @@
             </div>
         </nav>
         
-        <main>
-            <h1 class="text-center mt-4">Bem Vindo ao ReelRover!!</h1>
-            <section>
+        <main class="mx-auto mt-5">
+            <h1 class="text-center">Bem Vindo ao ReelRover!!</h1>
+            <section class="mt-3">
                 <p>
-                    Em um mundo cada vez mais digital, onde o entretenimento migra para plataformas online e streaming,
-                    as vídeo-locadoras continuam a desempenhar um papel significativo na vida de muitos amantes do cinema
-                    e da televisão. No entanto, para manter-se competitiva e eficiente, uma vídeo-locadora moderna requer
-                    uma gestão ágil e eficaz de seu acervo. É aqui que entra o Sistema de Controle de Acervo, uma solução
-                    tecnológica projetada para simplificar e otimizar todas as operações relacionadas à administração de 
-                    títulos e itens em uma vídeo-locadora.
+                    <!--Em um mundo cada vez mais digital, onde o entretenimento migra para plataformas online e streaming, as vídeo-locadoras continuam a desempenhar um papel significativo na vida de muitos amantes do cinema e da televisão.-->
                 </p>
-
+                
                 <p>
-                    Este sistema é a peça-chave para garantir que a vídeo-locadora permaneça relevante em um ambiente
-                    de mercado em constante evolução. Ele abrange uma ampla gama de funcionalidades essenciais para
-                    o sucesso do negócio, desde o acompanhamento preciso dos títulos disponíveis até o controle 
-                    eficiente dos itens em estoque. Ao unir tecnologia e gerenciamento, o Sistema de Controle de 
-                    Acervo oferece benefícios inestimáveis, tanto para os proprietários de vídeo-locadoras quanto 
-                    para seus clientes, garantindo uma experiência de aluguel de filmes e séries mais conveniente, 
-                    confiável e agradável. Neste contexto, exploraremos a fundo as funcionalidades e os benefícios 
-                    desse sistema vital para a indústria de vídeo-locadoras.
+                    <!--No entanto, para manter-se competitiva e eficiente, uma vídeo-locadora moderna requer uma gestão ágil e eficaz de seu acervo. É aqui que entra o Sistema de Controle de Acervo, uma solução tecnológica projetada para simplificar e otimizar todas as operações relacionadas à administração de títulos e itens em uma vídeo-locadora.-->
+                </p>
+fdbg
+                <p>
+                    <!--Este sistema é a peça-chave para garantir que a vídeo-locadora permaneça relevante em um ambiente de mercado em constante evolução. Ele abrange uma ampla gama de funcionalidades essenciais para o sucesso do negócio, desde o acompanhamento preciso dos títulos disponíveis até o controle eficiente dos itens em estoque.-->
+                </p>
+                <p>
+<!--                    Ao unir tecnologia e gerenciamento, o Sistema de Controle de Acervo oferece benefícios inestimáveis, tanto para os proprietários de vídeo-locadoras quanto para seus clientes, garantindo uma experiência de aluguel de filmes e séries mais conveniente, confiável e agradável.-->
+                    <!--Neste contexto, exploraremos a fundo as funcionalidades e os benefícios desse sistema vital para a indústria de vídeo-locadoras.-->
                 </p>
             </section>
         </main>

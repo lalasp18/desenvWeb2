@@ -22,7 +22,6 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="../index.jsp">
-                  <img src="../img/ReelRover.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
                 Reel Rover
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,15 +53,34 @@
         </nav>
         
         <main class="mx-auto mt-5">
-            <h4 class="text-center">Lista De Ator</h4>
-            <div class="row row-cols-2 row-cols-lg-5">
+            <h2>Lista De Ator</h2>
+            <div class="row row-cols-2 row-cols-lg-5 mt-4">
                 <div class="card col" style="width: 18rem;">
                     <div class="card-body">
                       <h5 class="card-title">Nome: </h5>
-                      <button type="button" class="btn btn-outline-warning"><a href="atorU.jsp" class="card-link">Editar</a></button>
-                      <button type="button" class="btn btn-outline-danger">Deletar</button>
+                      <button type="button" class="btn btn-warning"><a href="atorU.jsp" class="card-link">Editar</a></button>
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Deletar</button>
                     </div>
                 </div>
+            </div>
+            
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Você está prestes a excluir este item.</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <h3 id="modalAlert">Esta ação é irreversível.</h3>
+                      <p>Você deseja continuar?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary">Confirmar</button>
+                  </div>
+                </div>
+              </div>
             </div>
         </main>
         

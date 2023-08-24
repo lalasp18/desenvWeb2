@@ -23,7 +23,6 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="../index.jsp">
-                  <img src="../img/ReelRover.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
                 Reel Rover
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,8 +53,21 @@
             </div>
         </nav>
         
-        <main>
-            <h1 class="text-center">Editar Ator por ID</h1>
+        <main class="mx-auto mt-5">
+            <h2>Editar Ator por ID: ...</h2>
+            <form class="row g-3 needs-validation mx-auto mt-4" method="post" action="${pageContext.request.contextPath}/ator-control" novalidate>
+                <div class="col-md-8">
+                  <label for="inputNome" class="form-label">Nome do Ator</label>
+                  <input type="text" class="form-control" name="inputNome" id="inputNome" value="value input data" required>
+                  <div class="invalid-feedback">
+                    Informação inválida. Preencha o campo!
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+            </form>
         </main>
         
         <footer class="footer mt-lg-5">
@@ -89,5 +101,29 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     
+        <script>
+            (() => {
+                'use strict';
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation');
+
+                // Loop over them and prevent submission
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                          event.preventDefault();
+                          event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+
+                    form.addEventListener('reset', () => {
+                        form.classList.remove('was-validated');
+                    }, false);
+                });
+            })();
+        </script>
     </body>
 </html>

@@ -11,7 +11,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Classe;
@@ -55,9 +57,10 @@ public class ClasseController extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
         PrintWriter out = response.getWriter();
-        String nome = request.getParameter("nome");
-        String valor = request.getParameter("valor");
-        String dtDevolucao = request.getParameter("dtDevolucao");
+        List<String> listaDeDados = new ArrayList<>();
+        request.setAttribute("dados", listaDeDados);
+        request.getRequestDispatcher("/suaPagina.jsp").forward(request, response);
+
     }
 
     @Override
@@ -94,7 +97,7 @@ public class ClasseController extends HttpServlet {
         }
 
         request.setAttribute("mensagem", mensagem);
-        request.getRequestDispatcher("/classe/cadastrar.jsp").forward(request, response);
+        request.getRequestDispatcher("/classe/classeC.jsp").forward(request, response);
     }
 
     @Override

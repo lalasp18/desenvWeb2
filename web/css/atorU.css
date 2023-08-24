@@ -8,6 +8,13 @@ main{
     flex-grow: 1;
     width: 80%;
 }
+form{
+    width: 70%;
+    color: #517B2A;
+}
+label{
+    font-weight: 600;
+}
 .footer{
     font-family: 'Montserrat', sans-serif;
     width: 100%;
