@@ -32,7 +32,7 @@
                       <a class="nav-link" aria-current="page" href="index.jsp">Home</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="ator/atorR.jsp">Ator</a>
+                      <a class="nav-link" href="ator-control/ator/atorR.jsp">Ator</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="classe/classeR.jsp">Classe</a>
@@ -53,23 +53,42 @@
         
         <main class="mx-auto mt-5">
             <h1 class="text-center">Bem Vindo ao ReelRover!!</h1>
-            <section class="mt-3">
+            <section class="my-4 mx-auto">
                 <p>
-                    <!--Em um mundo cada vez mais digital, onde o entretenimento migra para plataformas online e streaming, as vídeo-locadoras continuam a desempenhar um papel significativo na vida de muitos amantes do cinema e da televisão.-->
+                    Em um mundo cada vez mais digital, onde o entretenimento migra para plataformas online e streaming, as vídeo-locadoras continuam a desempenhar um papel significativo na vida de muitos amantes do cinema e da televisão.
                 </p>
                 
                 <p>
-                    <!--No entanto, para manter-se competitiva e eficiente, uma vídeo-locadora moderna requer uma gestão ágil e eficaz de seu acervo. É aqui que entra o Sistema de Controle de Acervo, uma solução tecnológica projetada para simplificar e otimizar todas as operações relacionadas à administração de títulos e itens em uma vídeo-locadora.-->
+                    No entanto, para manter-se competitiva e eficiente, uma vídeo-locadora moderna requer uma gestão ágil e eficaz de seu acervo. É aqui que entra o Sistema de Controle de Acervo, uma solução tecnológica projetada para simplificar e otimizar todas as operações relacionadas à administração de títulos e itens em uma vídeo-locadora.
                 </p>
-fdbg
+
+                <div class="div_img my-3">
+                    <img src="img/ReelRover.gif" alt="Logo do sistema"/>
+                </div>
+                
                 <p>
-                    <!--Este sistema é a peça-chave para garantir que a vídeo-locadora permaneça relevante em um ambiente de mercado em constante evolução. Ele abrange uma ampla gama de funcionalidades essenciais para o sucesso do negócio, desde o acompanhamento preciso dos títulos disponíveis até o controle eficiente dos itens em estoque.-->
+                    Este sistema é a peça-chave para garantir que a vídeo-locadora permaneça relevante em um ambiente de mercado em constante evolução. Ele abrange uma ampla gama de funcionalidades essenciais para o sucesso do negócio, desde o acompanhamento preciso dos títulos disponíveis até o controle eficiente dos itens em estoque.
                 </p>
                 <p>
-<!--                    Ao unir tecnologia e gerenciamento, o Sistema de Controle de Acervo oferece benefícios inestimáveis, tanto para os proprietários de vídeo-locadoras quanto para seus clientes, garantindo uma experiência de aluguel de filmes e séries mais conveniente, confiável e agradável.-->
-                    <!--Neste contexto, exploraremos a fundo as funcionalidades e os benefícios desse sistema vital para a indústria de vídeo-locadoras.-->
+                    Ao unir tecnologia e gerenciamento, o Sistema de Controle de Acervo oferece benefícios inestimáveis, tanto para os proprietários de vídeo-locadoras quanto para seus clientes, garantindo uma experiência de aluguel de filmes e séries mais conveniente, confiável e agradável.
+                    Neste contexto, exploraremos a fundo as funcionalidades e os benefícios desse sistema vital para a indústria de vídeo-locadoras.
                 </p>
             </section>
+            
+            <div class="toast-container position-fixed bottom-0 end-0 p-3" >
+                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+                    <img src="..." class="rounded me-2" alt="...">
+                    <strong class="me-auto">Bootstrap</strong>
+                    <small>11 mins ago</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                    <%= request.getAttribute("mensagem") %>
+                  </div>
+                </div>
+            </div>
+
         </main>
         
         <footer class="footer mt-lg-5">
@@ -100,6 +119,14 @@ fdbg
             </div>
         </footer>
         
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var toastLiveExample = document.querySelector('.toast');
+                var toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
+            });
+        </script>
+    
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     </body>

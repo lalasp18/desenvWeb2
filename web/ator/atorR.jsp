@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -55,6 +56,18 @@
         <main class="mx-auto mt-5">
             <h2>Lista De Ator</h2>
             <div class="row row-cols-2 row-cols-lg-5 mt-4">
+                <c:forEach var="ator" items="${listaAtores}">
+                    <div class="card col" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Nome: ${ator.nome}</h5>
+                            <a href="atorU.jsp?id=${ator.idAtor}" class="btn btn-warning">Editar</a>
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Deletar</button>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+
+<!--            <div class="row row-cols-2 row-cols-lg-5 mt-4">
                 <div class="card col" style="width: 18rem;">
                     <div class="card-body">
                       <h5 class="card-title">Nome: </h5>
@@ -62,7 +75,7 @@
                       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Deletar</button>
                     </div>
                 </div>
-            </div>
+            </div>-->
             
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">

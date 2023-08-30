@@ -9,7 +9,17 @@ main{
     width: 100%;
 }
 section{
-    color: #FC6F6F;
+    width: 80%;
+    text-align: justify;
+    /*color: #FC6F6F;*/
+}
+.div_img{
+    text-align: center;
+}
+.div_img img{
+    width: 20rem;
+    height: 15rem;
+    object-fit: cover;
 }
 .footer{
     font-family: 'Montserrat', sans-serif;
