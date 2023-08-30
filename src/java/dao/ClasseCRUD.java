@@ -14,6 +14,14 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//drop table classe;
+//create table classe(
+//    idClasse SERIAL primary key,
+//    nome varchar(30) not null,
+//    valor double precision not null,
+//    dataDevolucao Date not null
+//);
+
 public class ClasseCRUD extends HttpServlet {
     private Connection conexao;
 

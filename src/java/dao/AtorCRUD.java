@@ -6,6 +6,7 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,8 +26,8 @@ import java.util.logging.Logger;
 //    nome varchar(30) not null
 //);
 
+//@WebServlet("/ator-control/*")
 public class AtorCRUD extends HttpServlet {
-    private Connection conexao;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -41,6 +43,7 @@ public class AtorCRUD extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
+            request.setAttribute("exibirToast", false);
     }
 
     @Override
@@ -49,41 +52,40 @@ public class AtorCRUD extends HttpServlet {
         List<Ator> listaAtores = new ArrayList<>();
         
         String mensagem = "";
-
-        try {
-            Class.forName("org.postgresql.Driver");
-            this.conexao = ConexaoBanco.getConnection();
-            
+        String color = "";
+        boolean exibirToast = false;
+        try{
+            Statement stmt = ConexaoBanco.getConnection().createStatement();
             String sql = "SELECT * FROM ator";
-            PreparedStatement stmt = conexao.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Ator ator = new Ator();
-                ator.setIdAtor(rs.getInt("idAtor"));
-                ator.setNome(rs.getString("nome"));
+                Ator ator = new Ator(rs.getInt("idAtor"), rs.getString("nome"));
+                mensagem = mensagem + ator.getIdAtor() +": "+ ator.getNome() + "\n";
 
+                System.out.println(mensagem+"aqui\n");
                 listaAtores.add(ator);
             }
 
-            rs.close();
-            stmt.close();
-            conexao.close();
-
-
-            RequestDispatcher rd = request.getRequestDispatcher("ator/atorR.jsp");
-            request.setAttribute("listaAtores", listaAtores);
-//            request.setAttribute("mensagem", mensagem);
-            rd.forward(request, response);
-            
 //            processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(AtorCRUD.class.getName()).log(Level.SEVERE, null, ex);
             mensagem = "Erro! Atores não encontrados.";
+            color = "#FC6F6F";
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AtorCRUD.class.getName()).log(Level.SEVERE, null, ex);
             mensagem = "Erro! Atores não encontrados.";
+            color = "#FC6F6F";
         }
+        
+        request.setAttribute("mensagem", mensagem);
+        request.setAttribute("color", color);
+        request.setAttribute("exibirToast", true);
+
+        RequestDispatcher rd = request.getRequestDispatcher("ator/atorR.jsp");
+        request.setAttribute("listaAtores", listaAtores);
+        rd.forward(request, response);
     }
 
     @Override
@@ -93,36 +95,40 @@ public class AtorCRUD extends HttpServlet {
         String nome = request.getParameter("inputNome");
 
         String mensagem = "";
+        String color = "";
+        boolean exibirToast = false;
 
         Ator ator = new Ator();
         ator.setNome(nome);
         
         try {
-            Class.forName("org.postgresql.Driver");
-            this.conexao = ConexaoBanco.getConnection();
-            
-            System.out.println("Connected");
-            
             String sql = "INSERT INTO ator (nome) VALUES (?)";
-            PreparedStatement stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, ator.getNome());
-            stmt.executeUpdate();
-
-            mensagem = "Ator cadastrado com sucesso!";
+            PreparedStatement pstmt = ConexaoBanco.getConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            int ind = 1;
+            pstmt.setString(ind++, ator.getNome());
+            pstmt.execute();
             
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-            request.setAttribute("mensagem", mensagem);
-            request.setAttribute("exibirToast", true);
-            rd.forward(request, response);
+            mensagem = "Ator cadastrado com sucesso!";
+            color = "#517B2A";
             
 //            processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(AtorCRUD.class.getName()).log(Level.SEVERE, null, ex);
             mensagem = "Erro! Ator não cadastrado.";
+            color = "#FC6F6F";
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AtorCRUD.class.getName()).log(Level.SEVERE, null, ex);
             mensagem = "Erro! Ator não cadastrado.";
+            color = "#FC6F6F";
         }
+        
+        request.setAttribute("mensagem", mensagem);
+        request.setAttribute("color", color);
+        request.setAttribute("exibirToast", true);
+
+        RequestDispatcher rd = request.getRequestDispatcher("ator/atorC.jsp");
+        rd.forward(request, response);
     }
 
     @Override

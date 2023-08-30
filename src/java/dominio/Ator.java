@@ -7,6 +7,11 @@ public class Ator {
     public Ator() {
     }
 
+    public Ator(int idAtor, String nome) {
+        this.idAtor = idAtor;
+        this.nome = nome;
+    }
+
     public int getIdAtor() {
         return idAtor;
     }

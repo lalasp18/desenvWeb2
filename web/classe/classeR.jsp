@@ -5,8 +5,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Locadora de Vídeo Passatempo - Listar Classe</title>
         
-        <link rel="icon" href="../img/ReelRover.png">
-        <link rel="stylesheet" href="../css/salvoClasse.css">
+        <link rel="icon" href="${pageContext.request.contextPath}/img/ReelRover.png">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/salvoClasse.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -23,21 +23,21 @@
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../index.jsp">Home</a>
+                    <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/index.jsp">Home</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="../ator/atorR.jsp">Ator</a>
+                      <a class="nav-link" href="${pageContext.request.contextPath}/ator/atorR.jsp">Ator</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="classeR.jsp">Classe</a>
+                      <a class="nav-link" href="${pageContext.request.contextPath}/classe/classeR.jsp">Classe</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Controle de Acervo
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="../ator/atorC.jsp">Cadastrar Ator</a></li>
-                      <li><a class="dropdown-item" href="classeC.jsp">Cadastrar Classe</a></li>
+                      <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ator/atorC.jsp">Cadastrar Ator</a></li>
+                      <li><a class="dropdown-item" href="${pageContext.request.contextPath}/classe/classeC.jsp">Cadastrar Classe</a></li>
                     </ul>
                   </li>
                 </ul>

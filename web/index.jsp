@@ -11,8 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Locadora de Vídeo Passatempo</title>
-        <link rel="stylesheet" href="css/index.css">
-        <link rel="icon" href="img/ReelRover.png">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+        <link rel="icon" href="${pageContext.request.contextPath}/img/ReelRover.png">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -29,21 +29,21 @@
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="index.jsp">Home</a>
+                      <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/index.jsp">Home</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="ator-control/ator/atorR.jsp">Ator</a>
+                      <a class="nav-link" href="${pageContext.request.contextPath}/ator/atorR.jsp">Ator</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="classe/classeR.jsp">Classe</a>
+                      <a class="nav-link" href="${pageContext.request.contextPath}/classe/classeR.jsp">Classe</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Controle de Acervo
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="ator/atorC.jsp">Cadastrar Ator</a></li>
-                      <li><a class="dropdown-item" href="classe/classeC.jsp">Cadastrar Classe</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ator/atorC.jsp">Cadastrar Ator</a></li>
+                      <li><a class="dropdown-item" href="${pageContext.request.contextPath}/classe/classeC.jsp">Cadastrar Classe</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -75,20 +75,6 @@
                 </p>
             </section>
             
-            <div class="toast-container position-fixed bottom-0 end-0 p-3" >
-                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                  <div class="toast-header">
-                    <img src="..." class="rounded me-2" alt="...">
-                    <strong class="me-auto">Bootstrap</strong>
-                    <small>11 mins ago</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                  </div>
-                  <div class="toast-body">
-                    <%= request.getAttribute("mensagem") %>
-                  </div>
-                </div>
-            </div>
-
         </main>
         
         <footer class="footer mt-lg-5">
@@ -118,14 +104,6 @@
               </div>
             </div>
         </footer>
-        
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                var toastLiveExample = document.querySelector('.toast');
-                var toast = new bootstrap.Toast(toastLiveExample);
-                toast.show();
-            });
-        </script>
     
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

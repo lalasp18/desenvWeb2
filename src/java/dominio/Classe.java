@@ -3,11 +3,20 @@ package dominio;
 import java.util.Date;
 
 public class Classe {
+    private int idClasse;
     private String nome;
     private double valor;
     private Date dataDevolucao;
 
     public Classe() {
+    }
+
+    public int getIdClasse() {
+        return idClasse;
+    }
+
+    public void setIdClasse(int idClasse) {
+        this.idClasse = idClasse;
     }
 
     public String getNome() {

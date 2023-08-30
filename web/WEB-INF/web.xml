@@ -10,7 +10,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AtorCRUD</servlet-name>
-        <url-pattern>/ator-control/*</url-pattern>
+        <url-pattern>/ator-control</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ClasseCRUD</servlet-name>
