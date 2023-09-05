@@ -55,10 +55,14 @@
         
         <main class="mx-auto mt-5">
             <h2>Editar Ator por ID: ...</h2>
-            <form class="row g-3 needs-validation mx-auto mt-4" method="post" action="${pageContext.request.contextPath}/ator-control" novalidate>
+            <form id="meuFormulario" class="row g-3 needs-validation mx-auto mt-4" method="PUT" action="${pageContext.request.contextPath}/ator-control/editar" novalidate>
+                <div class="col-md-8">
+                  <label for="inputID" class="form-label">ID do Ator</label>
+                  <input type="text" class="form-control" name="inputID" id="inputID" readonly>
+                </div>
                 <div class="col-md-8">
                   <label for="inputNome" class="form-label">Nome do Ator</label>
-                  <input type="text" class="form-control" name="inputNome" id="inputNome" value="value input data" required>
+                  <input type="text" class="form-control" name="inputNome" id="inputNome" required>
                   <div class="invalid-feedback">
                     Informação inválida. Preencha o campo!
                   </div>
@@ -102,13 +106,52 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     
         <script>
+            var urlParams = new URLSearchParams(window.location.search);
+            var id = urlParams.get('id');
+            var nomeAtor = urlParams.get('nome');
+
+            document.getElementById("inputID").value = id;
+            document.getElementById("inputNome").value = nomeAtor;
+
+        </script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("form").on("submit", function (event) {
+                    event.preventDefault();
+                    var nome = $("#inputNome").val();
+                    var id = $("#inputID").val();
+
+                    if (nome && id) {
+                        var formData = {
+                            id: id,
+                            nome: nome
+                        };
+
+                        $.ajax({
+                            type: "PUT",
+                            url: "${pageContext.request.contextPath}/ator-control/editar",
+                            data: JSON.stringify(formData),
+                            success: function (response) {
+                                alert("Ator editado com sucesso!");
+                                document.getElementById("meuFormulario").reset();
+                            },
+                            error: function () {
+                                alert("Erro! Alteração do ator não foi salva.");
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+        
+        <script>
             (() => {
                 'use strict';
 
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
                 const forms = document.querySelectorAll('.needs-validation');
 
-                // Loop over them and prevent submission
                 Array.from(forms).forEach(form => {
                     form.addEventListener('submit', event => {
                         if (!form.checkValidity()) {

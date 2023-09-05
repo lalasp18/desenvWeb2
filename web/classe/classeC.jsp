@@ -44,27 +44,34 @@
               </div>
             </div>
         </nav>
-        <main class="mx-auto mt-5">
+        <main class="mx-auto mt-5 mb-4">
             <h2>Cadastrar Classe</h2>
-            <form class="row g-3 mx-auto mt-4 needs-validation" method="post" action="" novalidate="">
+            <form id="meuFormulario" class="row g-3 needs-validation mx-auto mt-4" method="post" action="${pageContext.request.contextPath}/classe-control/postar" novalidate>
                 <div class="col-md-6">
                   <label for="inputNome" class="form-label">Nome</label>
-                  <input type="text" class="form-control" name="nome" id="inputNome" required="">
+                  <input type="text" class="form-control" name="inputNome" id="inputNome" required>
+                  <div class="invalid-feedback">
+                    Informação inválida. Preencha o campo!
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="inputValor" class="form-label">Valor</label>
-                  <input type="number" class="form-control" name="valor" id="inputValor" required="">
+                  <input type="number" class="form-control" name="inputValor" id="inputValor" required>
+                  <div class="invalid-feedback">
+                    Informação inválida. Preencha o campo!
+                  </div>
                 </div>
                 <div class="col-md-12">
                   <label for="inputDt" class="form-label">Data de Devolução</label>
-                  <input type="date" class="form-control" name="dtDevolucao" id="inputDt" required="">
+                  <input type="date" class="form-control" name="inputDt" id="inputDt" required>
+                  <div class="invalid-feedback">
+                    Informação inválida. Preencha o campo!
+                  </div>
                 </div>
 
-                <div class="col-2">
-                  <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
-                <div class="col-2">
-                  <button type="reset" class="btn btn-secondary">Resetar</button>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-success me-4">Enviar</button>
+                  <button type="reset" class="btn btn-secondary" id="resetaForm">Resetar</button>
                 </div>
             </form>
         </main>
@@ -99,5 +106,57 @@
         
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("form").on("submit", function (event) {
+                    event.preventDefault();
+                    
+                    var nome = document.getElementById('inputNome').value;
+                    var valor = document.getElementById('inputValor').value;
+                    var data = document.getElementById('inputDt').value;
+                    
+                    if (nome && valor && data) {
+                        var formData = $(this).serialize();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "${pageContext.request.contextPath}/classe-control/postar",
+                            data: formData,
+                            success: function (response) {
+                                alert("Classe cadastrada com sucesso!");
+                                document.getElementById("meuFormulario").reset();
+                            },
+                            error: function () {
+                                alert("Erro! Classe não cadastrada.");
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+        
+        <script>
+            (() => {
+                'use strict';
+                const forms = document.querySelectorAll('.needs-validation');
+
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                          event.preventDefault();
+                          event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+
+                    form.addEventListener('reset', () => {
+                        form.classList.remove('was-validated');
+                    }, false);
+                });
+            })();
+        </script>
     </body>
 </html>

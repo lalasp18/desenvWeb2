@@ -1,10 +1,25 @@
-package dominio;
+package domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Ator {
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idAtor;
+    
+    @Column (length = 50, nullable = false)
     private String nome;
 
     public Ator() {
+    }
+
+    public Ator(String nome) {
+        this.nome = nome;
     }
 
     public Ator(int idAtor, String nome) {

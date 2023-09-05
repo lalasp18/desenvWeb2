@@ -46,17 +46,13 @@
         </nav>
         
         <main class="mx-auto mt-5">
-            <h4 class="text-center">Lista de Classe</h4>
-            <div class="row row-cols-2 row-cols-lg-5">
-                <div class="card col" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">Nome: </h5>
-                      <h6 class="card-subtitle mb-2 text-body-secondary">Valor: </h6>
-                      <p class="card-text">Data de Devolução: </p>
-                      <a href="#" class="card-link">Card link</a>
-                      <a href="#" class="card-link">Another link</a>
-                    </div>
+            <h4 class="text-center">Lista de Classes</h4>
+            <div id="spinner-container" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
                 </div>
+              </div>
+            <div id="listaClasses" class="row row-cols-2 row-cols-lg-5 mt-4 mx-auto">
             </div>
         </main>
         
@@ -90,6 +86,89 @@
         
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "${pageContext.request.contextPath}/classe-control/listar",
+                    dataType: "json",
+                    success: function (classes) {
+                        var listaClasses = $("#listaClasses");
+
+                        listaClasses.empty();
+
+                        $.each(classes, function (index, classe) {
+                            var cardHtml = '<div class="card col mb-4 me-4 shadow bg-body-tertiary rounded" style="width: 18rem;cursor: pointer;">' +
+                                '<div class="card-body">' +
+                                '<h5 class="card-title">' + classe.nome + '</h5>' +
+                                '<h6 class="card-subtitle my-2 text-body-secondary">Valor: ' + classe.valor + '</h6>' +
+                                '<p class="card-text">' + classe.dataDevolucao + '</p>' +
+                                '<a href="${pageContext.request.contextPath}/classe/classeU.jsp?id=' + classe.idClasse + '&nome=' + classe.nome + '&valor=' + classe.valor + '&data=' + classe.dataDevolucao + '" class="btn btn-warning me-2">Editar</a>' +
+                                '<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Deletar</button>' +
+                                '</div>' +
+                                '</div>' +
+                        
+                        
+                        
+                                '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                                '<div class="modal-dialog modal-dialog-centered">' +
+                                '<div class="modal-content">' +
+                                '<div class="modal-header">' +
+                                '<h1 class="modal-title fs-5" id="exampleModalLabel">Você está prestes a excluir este item.</h1>' +
+                                '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                                '</div>' +
+                                '<div class="modal-body">' +
+                                '<h3 id="modalAlert">Esta ação é irreversível.</h3>' +
+                                '<p>Você deseja continuar?</p>' +
+                                '</div>' +
+                                '<div class="modal-footer">' +
+                                '<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>' +
+                                '<button onclick="deletarClasse(' + classe.idClasse + ')" id="btn-confirmar-deleta" type="button" class="btn btn-secondary">Confirmar</button>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+
+                            $("#listaClasses").append(cardHtml);
+                            $("#spinner-container").addClass("invisible");
+                        });
+                    },
+                    error: function () {
+                        alert("Erro ao buscar as classes.");
+                        $("#spinner-container").addClass("invisible");
+                    }
+                });
+                $("#spinner-container").addClass("invisible");
+            });
+            
+        </script>
+        
+        <script>
+            function deletarClasse(id) {
+                if(id){
+                    var formData = {
+                        id: id
+                    };
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '${pageContext.request.contextPath}/classe-control/excluir',
+                        data: JSON.stringify(formData),
+                        success: function (response) {
+                            alert('Classe excluída com sucesso');
+                            $('#exampleModal').modal('hide');
+                            $("#spinner-container").addClass("invisible");
+                        },
+                        error: function () {
+                            alert('Erro ao excluir a classe');
+                            $('#exampleModal').modal('hide');
+                            $("#spinner-container").addClass("invisible");
+                        }
+                    });
+                }
+            }
+        </script>
     
     </body>
 </html>

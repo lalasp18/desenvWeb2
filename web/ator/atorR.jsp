@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
-<%@page import="dominio.Ator" %>
+<%@page import="domain.Ator" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -55,67 +55,15 @@
         </nav>
         
         <main class="mx-auto mt-5">
-            <h2>Lista De Ator</h2>
-            
-            <%
-                List<Ator> atores = (List<Ator>) request.getAttribute("listaAtores");
-                if(atores != null) {
-                    for (Ator ator : atores) {
-            %>
-                        <div class="row row-cols-2 row-cols-lg-5 mt-4">
-                            <div class="card col" style="width: 18rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome: <%= ator.getNome() %>f</h5>
-                                    <a href="${pageContext.request.contextPath}/ator/atorU.jsp?id=<%= ator.getIdAtor() %>}" class="btn btn-warning">Editar</a>
-                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Deletar</button>
-                                </div>
-                            </div>
-                        </div>
-                                    
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Você está prestes a excluir este item.</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <h3 id="modalAlert">Esta ação é irreversível.</h3>
-                                  <p>Você deseja continuar?</p>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-secondary">Confirmar</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-            <%
-                    }
-                }
-            %>
-
-            <% 
-                Boolean mostrar = (Boolean) request.getAttribute("exibirToast");
-                String bkg = (String) request.getAttribute("color");
-                if (mostrar != null && mostrar == true) {
-            %>
-                <div class="toast-container position-fixed bottom-0 end-0 p-3" >
-                    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                      <div class="toast-header">
-                        <span class="badge me-2" style="background-color: <%= bkg %>; width: 20px; height: 20px;">  </span>
-                        <strong class="me-auto">Status de Requisição</strong>
-                        <small>agora</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                      </div>
-                      <div class="toast-body">
-                        <%= request.getAttribute("mensagem") %>
-                      </div>
-                    </div>
+            <h2>Lista De Atores</h2>
+            <div id="spinner-container" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
                 </div>
-            <%
-                }
-            %>
+              </div>
+
+            <div id="listaAtores" class="row row-cols-2 row-cols-lg-5 align-items-center">
+            </div>
         </main>
         
         <footer class="footer mt-lg-5">
@@ -149,12 +97,86 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
         
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                var toastLiveExample = document.querySelector('.toast');
-                var toast = new bootstrap.Toast(toastLiveExample);
-                toast.show();
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "${pageContext.request.contextPath}/ator-control/listar",
+                    dataType: "json",
+                    success: function (atores) {
+                        var listaAtores = $("#listaAtores");
+
+                        listaAtores.empty();
+
+                        $.each(atores, function (index, ator) {
+                            var modalId = 'exampleModal' + ator.idAtor;
+                            var cardHtml = '<div class="card col mb-4 me-4 shadow bg-body-tertiary rounded" style="width: 18rem;cursor: pointer;">' +
+                                '<div class="card-body">' +
+                                '<h5 class="card-title">' + ator.nome + '</h5>' +
+                                '<a href="${pageContext.request.contextPath}/ator/atorU.jsp?id=' + ator.idAtor + '&nome=' + ator.nome + '" class="btn btn-warning me-2">Editar</a>' +
+                                '<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#' + modalId + '">Deletar</button>' +
+                                '</div>' +
+                                '</div>'+
+                                
+                                
+                                '<div class="modal fade" id="' + modalId + '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                                '<div class="modal-dialog modal-dialog-centered">' +
+                                '<div class="modal-content">' +
+                                '<div class="modal-header">' +
+                                '<h1 class="modal-title fs-5" id="exampleModalLabel">Você está prestes a excluir este item.</h1>' +
+                                '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                                '</div>' +
+                                '<div class="modal-body">' +
+                                '<h3 id="modalAlert">Esta ação é irreversível.</h3>' +
+                                '<p>Você deseja continuar?</p>' +
+                                '</div>' +
+                                '<div class="modal-footer">' +
+                                '<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>' +
+                                '<button onclick="deletarAtor(' + ator.idAtor + ')" id="btn-confirmar-deleta" type="button" class="btn btn-secondary">Confirmar</button>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+
+                            $("#listaAtores").append(cardHtml);
+                            $("#spinner-container").addClass("invisible");
+                        });
+                    },
+                    error: function () {
+                        alert("Erro ao buscar os atores.");
+                        $("#spinner-container").addClass("invisible");
+                    }
+                });
+                $("#spinner-container").addClass("invisible");
             });
+            
         </script>
+        
+        <script>
+            function deletarAtor(id) {
+                if(id){
+                    var formData = {
+                        id: id
+                    };
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '${pageContext.request.contextPath}/ator-control/excluir',
+                        data: JSON.stringify(formData),
+                        success: function (response) {
+                            alert('Ator excluído com sucesso');
+                            $('#exampleModal').modal('hide');
+                            $("#spinner-container").addClass("invisible");
+                        },
+                        error: function () {
+                            alert('Erro ao excluir o ator');
+                            $('#exampleModal').modal('hide');
+                            $("#spinner-container").addClass("invisible");
+                        }
+                    });
+                }
+            }
+        </script>
+        
     </body>
 </html>
