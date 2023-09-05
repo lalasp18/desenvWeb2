@@ -22,7 +22,7 @@
         
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="../index.jsp">
+              <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">
                 Reel Rover
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,21 +31,25 @@
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../index.jsp">Home</a>
+                    <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/index.jsp">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="atorR.jsp">Ator</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/ator/atorR.jsp">Ator</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="../classe/classeR.jsp">Classe</a>
+                      <a class="nav-link" href="${pageContext.request.contextPath}/classe/classeR.jsp">Classe</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="${pageContext.request.contextPath}/diretor/diretorR.jsp">Diretor</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Controle de Acervo
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="atorC.jsp">Cadastrar Ator</a></li>
-                      <li><a class="dropdown-item" href="../classe/classeC.jsp">Cadastrar Classe</a></li>
+                      <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ator/atorC.jsp">Cadastrar Ator</a></li>
+                      <li><a class="dropdown-item" href="${pageContext.request.contextPath}/classe/classeC.jsp">Cadastrar Classe</a></li>
+                      <li><a class="dropdown-item" href="${pageContext.request.contextPath}/diretor/diretorC.jsp">Cadastrar Diretor</a></li>
                     </ul>
                   </li>
                 </ul>

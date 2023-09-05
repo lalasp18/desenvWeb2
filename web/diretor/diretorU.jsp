@@ -1,18 +1,26 @@
+<%-- 
+    Document   : diretorU
+    Created on : 23 de ago. de 2023, 14:03:56
+    Author     : LEDS
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Locadora de Vídeo Passatempo - Listar Classe</title>
+        <title>Locadora de Vídeo Passatempo - ID Diretor</title>
         
-        <link rel="icon" href="${pageContext.request.contextPath}/img/ReelRover.png">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/salvoClasse.css">
+        <link rel="icon" href="../img/ReelRover.png">
+        <link rel="stylesheet" href="../css/diretorU.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
     </head>
     <body>
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">
                 Reel Rover
@@ -50,14 +58,24 @@
         </nav>
         
         <main class="mx-auto mt-5">
-            <h4 class="text-center">Lista de Classes</h4>
-            <div id="spinner-container" class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
+            <h2>Editar Diretor por ID: ...</h2>
+            <form id="meuFormulario" class="row g-3 needs-validation mx-auto mt-4" method="PUT" action="${pageContext.request.contextPath}/diretor-control/editar" novalidate>
+                <div class="col-md-8">
+                  <label for="inputID" class="form-label">ID do Diretor</label>
+                  <input type="text" class="form-control" name="inputID" id="inputID" readonly>
                 </div>
-              </div>
-            <div id="listaClasses" class="row row-cols-2 row-cols-lg-5 mt-4 mx-auto">
-            </div>
+                <div class="col-md-8">
+                  <label for="inputNome" class="form-label">Nome do Diretor</label>
+                  <input type="text" class="form-control" name="inputNome" id="inputNome" required>
+                  <div class="invalid-feedback">
+                    Informação inválida. Preencha o campo!
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+            </form>
         </main>
         
         <footer class="footer mt-lg-5">
@@ -90,89 +108,69 @@
         
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    
+        <script>
+            var urlParams = new URLSearchParams(window.location.search);
+            var id = urlParams.get('id');
+            var nomeDiretor = urlParams.get('nome');
+
+            document.getElementById("inputID").value = id;
+            document.getElementById("inputNome").value = nomeDiretor;
+
+        </script>
         
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
-                $.ajax({
-                    type: "GET",
-                    url: "${pageContext.request.contextPath}/classe-control/listar",
-                    dataType: "json",
-                    success: function (classes) {
-                        var listaClasses = $("#listaClasses");
+                $("form").on("submit", function (event) {
+                    event.preventDefault();
+                    var nome = $("#inputNome").val();
+                    var id = $("#inputID").val();
 
-                        listaClasses.empty();
+                    if (nome && id) {
+                        var formData = {
+                            id: id,
+                            nome: nome
+                        };
 
-                        $.each(classes, function (index, classe) {
-                            var cardHtml = '<div class="card col mb-4 me-4 shadow bg-body-tertiary rounded" style="width: 18rem;cursor: pointer;">' +
-                                '<div class="card-body">' +
-                                '<h5 class="card-title">' + classe.nome + '</h5>' +
-                                '<h6 class="card-subtitle my-2 text-body-secondary">Valor: ' + classe.valor + '</h6>' +
-                                '<p class="card-text">' + classe.dataDevolucao + '</p>' +
-                                '<a href="${pageContext.request.contextPath}/classe/classeU.jsp?id=' + classe.idClasse + '&nome=' + classe.nome + '&valor=' + classe.valor + '&data=' + classe.dataDevolucao + '" class="btn btn-warning me-2">Editar</a>' +
-                                '<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Deletar</button>' +
-                                '</div>' +
-                                '</div>' +
-                        
-                        
-                        
-                                '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
-                                '<div class="modal-dialog modal-dialog-centered">' +
-                                '<div class="modal-content">' +
-                                '<div class="modal-header">' +
-                                '<h1 class="modal-title fs-5" id="exampleModalLabel">Você está prestes a excluir este item.</h1>' +
-                                '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
-                                '</div>' +
-                                '<div class="modal-body">' +
-                                '<h3 id="modalAlert">Esta ação é irreversível.</h3>' +
-                                '<p>Você deseja continuar?</p>' +
-                                '</div>' +
-                                '<div class="modal-footer">' +
-                                '<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>' +
-                                '<button onclick="deletarClasse(' + classe.idClasse + ')" id="btn-confirmar-deleta" type="button" class="btn btn-secondary">Confirmar</button>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
-
-                            $("#listaClasses").append(cardHtml);
-                            $("#spinner-container").addClass("invisible");
+                        $.ajax({
+                            type: "PUT",
+                            url: "${pageContext.request.contextPath}/diretor-control/editar",
+                            data: JSON.stringify(formData),
+                            success: function (response) {
+                                alert("Diretor editado com sucesso!");
+                                document.getElementById("meuFormulario").reset();
+                            },
+                            error: function () {
+                                alert("Erro! Alteração do diretor não foi salva.");
+                            }
                         });
-                    },
-                    error: function () {
-                        alert("Erro ao buscar as classes.");
-                        $("#spinner-container").addClass("invisible");
                     }
                 });
-                $("#spinner-container").addClass("invisible");
             });
-            
         </script>
         
         <script>
-            function deletarClasse(id) {
-                if(id){
-                    var formData = {
-                        id: id
-                    };
-                    $.ajax({
-                        type: 'DELETE',
-                        url: '${pageContext.request.contextPath}/classe-control/excluir',
-                        data: JSON.stringify(formData),
-                        success: function (response) {
-                            alert('Classe excluída com sucesso');
-                            $('#exampleModal').modal('hide');
-                            $("#spinner-container").addClass("invisible");
-                        },
-                        error: function () {
-                            alert('Erro ao excluir a classe');
-                            $('#exampleModal').modal('hide');
-                            $("#spinner-container").addClass("invisible");
+            (() => {
+                'use strict';
+
+                const forms = document.querySelectorAll('.needs-validation');
+
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                          event.preventDefault();
+                          event.stopPropagation();
                         }
-                    });
-                }
-            }
+
+                        form.classList.add('was-validated');
+                    }, false);
+
+                    form.addEventListener('reset', () => {
+                        form.classList.remove('was-validated');
+                    }, false);
+                });
+            })();
         </script>
-    
     </body>
 </html>

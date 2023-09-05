@@ -1,18 +1,27 @@
+<%-- 
+    Document   : diretorR
+    Created on : 23 de ago. de 2023, 13:55:31
+    Author     : LEDS
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List" %>
+<%@page import="domain.Diretor" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Locadora de Vídeo Passatempo - Listar Classe</title>
+        <title>Locadora de Vídeo Passatempo - Listar Diretor</title>
         
         <link rel="icon" href="${pageContext.request.contextPath}/img/ReelRover.png">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/salvoClasse.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/diretorR.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
     </head>
     <body>
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">
                 Reel Rover
@@ -50,13 +59,14 @@
         </nav>
         
         <main class="mx-auto mt-5">
-            <h4 class="text-center">Lista de Classes</h4>
+            <h2>Lista De Diretores</h2>
             <div id="spinner-container" class="d-flex justify-content-center">
                 <div class="spinner-border" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
               </div>
-            <div id="listaClasses" class="row row-cols-2 row-cols-lg-5 mt-4 mx-auto">
+
+            <div id="listaDiretores" class="row row-cols-2 row-cols-lg-5 align-items-center">
             </div>
         </main>
         
@@ -96,27 +106,25 @@
             $(document).ready(function () {
                 $.ajax({
                     type: "GET",
-                    url: "${pageContext.request.contextPath}/classe-control/listar",
+                    url: "${pageContext.request.contextPath}/diretor-control/listar",
                     dataType: "json",
-                    success: function (classes) {
-                        var listaClasses = $("#listaClasses");
+                    success: function (diretores) {
+                        var listaDiretores = $("#listaDiretores");
 
-                        listaClasses.empty();
+                        listaDiretores.empty();
 
-                        $.each(classes, function (index, classe) {
+                        $.each(diretores, function (index, diretor) {
+                            var modalId = 'exampleModal' + diretor.idDiretor;
                             var cardHtml = '<div class="card col mb-4 me-4 shadow bg-body-tertiary rounded" style="width: 18rem;cursor: pointer;">' +
                                 '<div class="card-body">' +
-                                '<h5 class="card-title">' + classe.nome + '</h5>' +
-                                '<h6 class="card-subtitle my-2 text-body-secondary">Valor: ' + classe.valor + '</h6>' +
-                                '<p class="card-text">' + classe.dataDevolucao + '</p>' +
-                                '<a href="${pageContext.request.contextPath}/classe/classeU.jsp?id=' + classe.idClasse + '&nome=' + classe.nome + '&valor=' + classe.valor + '&data=' + classe.dataDevolucao + '" class="btn btn-warning me-2">Editar</a>' +
-                                '<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Deletar</button>' +
+                                '<h5 class="card-title">' + diretor.nome + '</h5>' +
+                                '<a href="${pageContext.request.contextPath}/diretor/diretorU.jsp?id=' + diretor.idDiretor + '&nome=' + diretor.nome + '" class="btn btn-warning me-2">Editar</a>' +
+                                '<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#' + modalId + '">Deletar</button>' +
                                 '</div>' +
-                                '</div>' +
-                        
-                        
-                        
-                                '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                                '</div>'+
+                                
+                                
+                                '<div class="modal fade" id="' + modalId + '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
                                 '<div class="modal-dialog modal-dialog-centered">' +
                                 '<div class="modal-content">' +
                                 '<div class="modal-header">' +
@@ -129,18 +137,18 @@
                                 '</div>' +
                                 '<div class="modal-footer">' +
                                 '<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>' +
-                                '<button onclick="deletarClasse(' + classe.idClasse + ')" id="btn-confirmar-deleta" type="button" class="btn btn-secondary">Confirmar</button>' +
+                                '<button onclick="deletarDiretor(' + diretor.idDiretor + ')" id="btn-confirmar-deleta" type="button" class="btn btn-secondary">Confirmar</button>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>';
 
-                            $("#listaClasses").append(cardHtml);
+                            $("#listaDiretores").append(cardHtml);
                             $("#spinner-container").addClass("invisible");
                         });
                     },
                     error: function () {
-                        alert("Erro ao buscar as classes.");
+                        alert("Erro ao buscar os diretores.");
                         $("#spinner-container").addClass("invisible");
                     }
                 });
@@ -150,22 +158,22 @@
         </script>
         
         <script>
-            function deletarClasse(id) {
+            function deletarDiretor(id) {
                 if(id){
                     var formData = {
                         id: id
                     };
                     $.ajax({
                         type: 'DELETE',
-                        url: '${pageContext.request.contextPath}/classe-control/excluir',
+                        url: '${pageContext.request.contextPath}/diretor-control/excluir',
                         data: JSON.stringify(formData),
                         success: function (response) {
-                            alert('Classe excluída com sucesso');
+                            alert('Diretor excluído com sucesso');
                             $('#exampleModal').modal('hide');
                             $("#spinner-container").addClass("invisible");
                         },
                         error: function () {
-                            alert('Erro ao excluir a classe');
+                            alert('Erro ao excluir o diretor');
                             $('#exampleModal').modal('hide');
                             $("#spinner-container").addClass("invisible");
                         }
@@ -173,6 +181,6 @@
                 }
             }
         </script>
-    
+        
     </body>
 </html>

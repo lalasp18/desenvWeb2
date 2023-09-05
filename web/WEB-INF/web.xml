@@ -8,6 +8,10 @@
         <servlet-name>ClasseController</servlet-name>
         <servlet-class>controller.ClasseController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DiretorController</servlet-name>
+        <servlet-class>controller.DiretorController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AtorController</servlet-name>
         <url-pattern>/ator-control</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ClasseController</servlet-name>
         <url-pattern>/classe-control</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DiretorController</servlet-name>
+        <url-pattern>/diretor-control</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -15,5 +15,6 @@
     <property name="hibernate.format_sql">true</property>
     <mapping class="domain.Ator"></mapping>
     <mapping class="domain.Classe"></mapping>
+    <mapping class="domain.Diretor"></mapping>
   </session-factory>
 </hibernate-configuration>
